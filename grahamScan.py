@@ -97,7 +97,7 @@ def generate_points(n, low=-1000, high=1000, circular=False):
         return [Point(random.randint(low, high), random.randint(low, high)) for _ in range(n)]
 
 # function to plot hull
-def plot_hull(points, hull, title):
+def plot_hull(points, hull, title, text = ''):
     plt.figure()
     plt.scatter([p.x for p in points], [p.y for p in points], label='Points')
     hull.append(hull[0])  # close the hull
@@ -106,6 +106,7 @@ def plot_hull(points, hull, title):
     plt.title(title)
     pdftitle = title.replace(" ", "")
     pdftitle += ".pdf"
+    plt.text(0, 0, text, fontsize=8, transform=plt.gcf().transFigure)
     plt.savefig(pdftitle, format='pdf')
     plt.show()
 
@@ -132,26 +133,26 @@ def main():
     graham_hull = graham_scan(test_points)
     print("Naive Hull:", naive_hull)
     print("Graham Hull:", graham_hull)
-    plot_hull(test_points, naive_hull, "Naive Convex Hull - 20 points")
-    plot_hull(test_points, graham_hull, "Graham Scan Convex Hull - 20 points")
+    plot_hull(test_points, naive_hull, "Naive Convex Hull - 20 points", text=naive_hull)
+    plot_hull(test_points, graham_hull, "Graham Scan Convex Hull - 20 points", text=graham_hull)
 
     # edge-case tests
     test_collinear = [Point(10, random.randint(0, 20)) for i in range(10)]
     graham_hull_collinear = graham_scan(test_collinear)
-    plot_hull(test_collinear, graham_hull_collinear, "Graham Scan Edgecase - Collinear")
+    plot_hull(test_collinear, graham_hull_collinear, "Graham Scan Edgecase - Collinear", text=graham_hull_collinear)
 
     test_zigzag = [Point(0,0), Point(1,5), Point(2,-5), Point(3,10), Point(4, -10), Point(5,12), Point(6, -12)]
     graham_hull_zigzag = graham_scan(test_zigzag)
-    plot_hull(test_zigzag, graham_hull_zigzag, "Graham Scan Edgecase - Zigzag")
+    plot_hull(test_zigzag, graham_hull_zigzag, "Graham Scan Edgecase - Zigzag", text=graham_hull_zigzag)
 
     test_grouped = [Point(random.randint(0,5), random.randint(0, 5)) for i in range(10)]
     test_grouped.append(Point(20, 20))
     graham_hull_grouped = graham_scan(test_grouped)
-    plot_hull(test_grouped, graham_hull_grouped, "Graham Scan Edgecase - Grouped")
+    plot_hull(test_grouped, graham_hull_grouped, "Graham Scan Edgecase - Grouped", text=graham_hull_grouped)
 
-    test_circular = generate_points(20, circular=True)
+    test_circular = generate_points(8, circular=True)
     graham_hull_circular = graham_scan(test_circular)
-    plot_hull(test_circular, graham_hull_circular, "Graham Scan Edgecase - Circular")
+    plot_hull(test_circular, graham_hull_circular, "Graham Scan Edgecase - Circular", text=graham_hull_circular)
 
     # run benchmark
     benchmark()
