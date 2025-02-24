@@ -106,7 +106,7 @@ def plot_hull(points, hull, title, text = ''):
     plt.title(title)
     pdftitle = title.replace(" ", "")
     pdftitle += ".pdf"
-    plt.text(0, 0, text, fontsize=8, transform=plt.gcf().transFigure)
+    plt.text(0, 0.02, text, fontsize=8, transform=plt.gcf().transFigure)
     plt.savefig(pdftitle, format='pdf')
     plt.show()
 
