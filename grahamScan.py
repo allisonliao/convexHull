@@ -132,8 +132,22 @@ def main():
     plot_hull(test_points, naive_hull, "Naïve Convex Hull")
     plot_hull(test_points, graham_hull, "Graham Scan Convex Hull")
 
+    # edge-case tests
+    test_collinear = [Point(10, random.randint(0, 1000)) for i in range(10)]
+    graham_hull_collinear = graham_scan(test_collinear)
+    plot_hull(test_collinear, graham_hull_collinear, "Graham Scan Edgecase - Collinear")
+
+    test_zigzag = [Point(0,0), Point(1,5), Point(2,-5), Point(3,10), Point(4, -10), Point(5,12), Point(6, -12)]
+    graham_hull_zigzag = graham_scan(test_zigzag)
+    plot_hull(test_zigzag, graham_hull_zigzag, "Graham Scan Edgecase - Zigzag")
+
     # run benchmark
     benchmark()
+
+    # RESULTS
+    # n=1000: Naïve=0.7192s, Graham=0.0013s
+    # n=10000: Naïve=69.1724s, Graham=0.0160s
+    # n=100000: Naïve=9046.7429s, Graham=0.1899s
 
 if __name__ == "__main__":
     main()
