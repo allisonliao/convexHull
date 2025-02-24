@@ -10,7 +10,7 @@ import random
 import time
 import matplotlib.pyplot as plt
 from itertools import combinations
-from math import atan2
+from math import atan2, cos, sin
 
 class Point:
     def __init__(self, x, y):
@@ -92,7 +92,7 @@ def graham_scan(points):
 # function to generate random point sets
 def generate_points(n, low=-1000, high=1000, circular=False):
     if circular:
-        return [Point(int(500 * random.cos(2 * 3.14159 * i / n)), int(500 * random.sin(2 * 3.14159 * i / n))) for i in range(n)]
+        return [Point(int(500 * cos(2 * 3.14159 * i / n)), int(500 * sin(2 * 3.14159 * i / n))) for i in range(n)]
     else:
         return [Point(random.randint(low, high), random.randint(low, high)) for _ in range(n)]
 
@@ -148,6 +148,10 @@ def main():
     test_grouped.append(Point(20, 20))
     graham_hull_grouped = graham_scan(test_grouped)
     plot_hull(test_grouped, graham_hull_grouped, "Graham Scan Edgecase - Grouped")
+
+    test_circular = generate_points(20, circular=True)
+    graham_hull_circular = graham_scan(test_circular)
+    plot_hull(test_circular, graham_hull_circular, "Graham Scan Edgecase - Circular")
 
     # run benchmark
     benchmark()
