@@ -166,3 +166,6 @@ def main():
     # For the Graham's Scan implementation, we expect that when n increases
     # by 10, the runtime would increase by 10 * log_2(10) or about 33x.
     # Similarly, this implementation performed a little better than expected.
+
+if __name__ == "__main__":
+    main()
