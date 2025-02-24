@@ -159,13 +159,15 @@ def main():
 
 
     # TIME ANALYSIS
-    # Although we expect the naive implementation to increase by a factor
-    # of 10^3 when n increases by 10, the actual time increased by less than 
-    # 10^2. This could be because of python's built in hash/set efficiencies.
+    # Although we expect the naive implementation to increase by a 
+    # factor of 10^3 when n increases by 10, the actual time 
+    # increased by less than 10^2. This could be because of python's 
+    # built in hash/set efficiencies.
 
-    # For the Graham's Scan implementation, we expect that when n increases
-    # by 10, the runtime would increase by 10 * log_2(10) or about 33x.
-    # Similarly, this implementation performed a little better than expected.
+    # For the Graham's Scan implementation, we expect that when n 
+    # increases by 10, the runtime would increase by 10 * log_2(10) 
+    # or about 33x. Similarly, this implementation performed a little 
+    # better than expected.
 
 if __name__ == "__main__":
     main()
