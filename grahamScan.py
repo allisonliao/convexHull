@@ -127,16 +127,16 @@ def benchmark():
 
 def main():
     # baseline test
-    test_points = generate_points(1000)
+    test_points = generate_points(20)
     naive_hull = naive_convex_hull(test_points)
     graham_hull = graham_scan(test_points)
     print("Naive Hull:", naive_hull)
     print("Graham Hull:", graham_hull)
-    plot_hull(test_points, naive_hull, "Naive Convex Hull - 1000 points")
-    plot_hull(test_points, graham_hull, "Graham Scan Convex Hull - 1000 points")
+    plot_hull(test_points, naive_hull, "Naive Convex Hull - 20 points")
+    plot_hull(test_points, graham_hull, "Graham Scan Convex Hull - 20 points")
 
     # edge-case tests
-    test_collinear = [Point(10, random.randint(0, 1000)) for i in range(10)]
+    test_collinear = [Point(10, random.randint(0, 20)) for i in range(10)]
     graham_hull_collinear = graham_scan(test_collinear)
     plot_hull(test_collinear, graham_hull_collinear, "Graham Scan Edgecase - Collinear")
 
@@ -157,5 +157,12 @@ def main():
     # n=10000: Naive=69.1724s, Graham=0.0160s
     # n=100000: Naive=9046.7429s, Graham=0.1899s
 
-if __name__ == "__main__":
-    main()
+
+    # TIME ANALYSIS
+    # Although we expect the naive implementation to increase by a factor
+    # of 10^3 when n increases by 10, the actual time increased by less than 
+    # 10^2. This could be because of python's built in hash/set efficiencies.
+
+    # For the Graham's Scan implementation, we expect that when n increases
+    # by 10, the runtime would increase by 10 * log_2(10) or about 33x.
+    # Similarly, this implementation performed a little better than expected.
