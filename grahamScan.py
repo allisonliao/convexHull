@@ -104,6 +104,9 @@ def plot_hull(points, hull, title):
     plt.plot([p.x for p in hull], [p.y for p in hull], 'r-', label='Convex Hull')
     plt.legend()
     plt.title(title)
+    pdftitle = title.replace(" ", "")
+    pdftitle += ".pdf"
+    plt.savefig(pdftitle, format='pdf')
     plt.show()
 
 # benchmark function that times the algorithms and runs tests
@@ -129,8 +132,8 @@ def main():
     graham_hull = graham_scan(test_points)
     print("Naive Hull:", naive_hull)
     print("Graham Hull:", graham_hull)
-    plot_hull(test_points, naive_hull, "Naive Convex Hull")
-    plot_hull(test_points, graham_hull, "Graham Scan Convex Hull")
+    plot_hull(test_points, naive_hull, "Naive Convex Hull - 1000 points")
+    plot_hull(test_points, graham_hull, "Graham Scan Convex Hull - 1000 points")
 
     # edge-case tests
     test_collinear = [Point(10, random.randint(0, 1000)) for i in range(10)]
