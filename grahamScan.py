@@ -141,6 +141,11 @@ def main():
     graham_hull_zigzag = graham_scan(test_zigzag)
     plot_hull(test_zigzag, graham_hull_zigzag, "Graham Scan Edgecase - Zigzag")
 
+    test_grouped = [Point(random.randint(0,5), random.randint(0, 5)) for i in range(10)]
+    test_grouped.append(Point(100, 100))
+    graham_hull_grouped = graham_scan(test_grouped)
+    plot_hull(test_grouped, graham_hull_grouped, "Graham Scan Edgecase - Grouped")
+
     # run benchmark
     benchmark()
 
